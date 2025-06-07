@@ -1,21 +1,11 @@
-name: Run system-info.js
+const os = require('os');
 
-on:
-  push:
-    branches: [ main ]
+console.log('System Information:');
+console.log(`Hostname: ${os.hostname()}`);
+console.log(`Platform: ${os.platform()}`);
+console.log(`Architecture: ${os.arch()}`);
+console.log(`CPU Cores: ${os.cpus().length}`);
+console.log(`Total Memory: ${Math.round(os.totalmem() / 1024 / 1024)} MB`);
+console.log(`Free Memory: ${Math.round(os.freemem() / 1024 / 1024)} MB`);
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-
-    - name: Run Node.js script
-      run: node system-info.js
 
